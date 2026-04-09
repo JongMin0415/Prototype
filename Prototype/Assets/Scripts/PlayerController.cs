@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 5f;
-    
+    public GameObject bulletPrefab;
+    public Transform firePoint;
+
     private Rigidbody2D rb;
     private Vector2 movement;
     private Animator anim;
@@ -30,10 +32,25 @@ public class PlayerController : MonoBehaviour
             anim.SetFloat("LastMoveX", movement.x);
             anim.SetFloat("LastMoveY", movement.y);
         }
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            Shoot();
+        }
     }
 
     private void FixedUpdate()
     {
         rb.velocity = movement.normalized * speed;
+    }
+    void Shoot()
+    {
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0f;
+
+        Vector2 dir = (mousePos - transform.position).normalized;
+
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        bullet.GetComponent<Bullet>().SetDirection(dir);
     }
 }
