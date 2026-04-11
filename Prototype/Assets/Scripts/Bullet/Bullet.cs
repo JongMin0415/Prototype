@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed = 10f;
+    public float damage = 1f;
     private Vector2 direction;
 
     public void SetDirection(Vector2 dir)
@@ -24,7 +25,13 @@ public class Bullet : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            Destroy(collision.gameObject); // 나중에 HP로 바꾸기
+            Enemy enemy = collision.GetComponent<Enemy>();
+
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+            }
+
             Destroy(gameObject);
         }
     }

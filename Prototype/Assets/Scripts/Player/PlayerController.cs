@@ -8,14 +8,23 @@ public class PlayerController : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform firePoint;
 
+    public int maxLives = 3;
+    private int currentLives;
+    public float invincibleTime = 1f;
+    private bool isInvincible = false;
+    public float blinkInterval = 0.1f;
+
     private Rigidbody2D rb;
     private Vector2 movement;
     private Animator anim;
+    private SpriteRenderer sr;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
+        currentLives = maxLives;
     }
 
     // Update is called once per frame
@@ -52,5 +61,43 @@ public class PlayerController : MonoBehaviour
 
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         bullet.GetComponent<Bullet>().SetDirection(dir);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (isInvincible) return;
+
+        currentLives -= damage;
+
+        Debug.Log("Player Lives: " + currentLives);
+
+        if (currentLives <= 0)
+        {
+            Die();
+        }
+
+        StartCoroutine(Invincible());
+    }
+    IEnumerator Invincible()
+    {
+        isInvincible = true;
+
+        float timer = 0f;
+
+        while (timer < invincibleTime)
+        {
+            sr.enabled = !sr.enabled;
+            yield return new WaitForSeconds(blinkInterval);
+            timer += blinkInterval;
+        }
+
+        sr.enabled = true;
+        isInvincible = false;
+    }
+
+    void Die()
+    {
+        Debug.Log("Player Dead");
+        Destroy(gameObject);
     }
 }

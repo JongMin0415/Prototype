@@ -17,11 +17,17 @@ public class EnemyBullet : MonoBehaviour
         transform.Translate(direction * speed * Time.deltaTime);
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("플레이어 맞음!");
+            PlayerController player = collision.GetComponent<PlayerController>();
+
+            if (player != null)
+            {
+                player.TakeDamage(1);
+            }
+
             Destroy(gameObject);
         }
     }
