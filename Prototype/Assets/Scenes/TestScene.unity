@@ -706,6 +706,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1263964327914624771, guid: e9300c9e0b6639f46b3c187f5f6e9738, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4819747745483988006, guid: e9300c9e0b6639f46b3c187f5f6e9738, type: 3}
       propertyPath: m_Name
       value: NormalEnemy
@@ -803,6 +807,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 264651100541344265, guid: 95121e85d22fe104a84a8a7aee38bb50, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6708010525824982709, guid: 95121e85d22fe104a84a8a7aee38bb50, type: 3}
       propertyPath: m_Name
       value: SpreadEnemy
@@ -820,6 +828,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3525485692046906921, guid: ea82136be97b91240b6ba98cff0fcde8, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4884571411949538575, guid: ea82136be97b91240b6ba98cff0fcde8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.77
