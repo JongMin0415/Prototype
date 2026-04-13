@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 movement;
     private Animator anim;
     private SpriteRenderer sr;
+    private CameraShake camShake;
 
     void Start()
     {
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
         playerLayer = LayerMask.NameToLayer("Player");
         enemyBulletLayer = LayerMask.NameToLayer("EnemyBullet");
+        camShake = Camera.main.GetComponent<CameraShake>();
     }
 
     void Update()
@@ -91,6 +93,7 @@ public class PlayerController : MonoBehaviour
 
         currentLives -= damage;
         Debug.Log("Player Lives: " + currentLives);
+        StartCoroutine(camShake.Shake(0.2f, 0.15f));
 
         if (currentLives <= 0)
         {
