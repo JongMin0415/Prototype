@@ -248,6 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+  maxHP: 10
 --- !u!60 &851171748
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -399,7 +400,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1593054842}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,7 +551,7 @@ GameObject:
   - component: {fileID: 1768727643}
   - component: {fileID: 1768727647}
   - component: {fileID: 1768727648}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -572,6 +573,11 @@ MonoBehaviour:
   speed: 5
   bulletPrefab: {fileID: 4060703724432325910, guid: 987a4c07b0f2ee34abeb8b24a6bea613, type: 3}
   firePoint: {fileID: 1593054842}
+  maxLives: 3
+  invincibleTime: 1
+  blinkInterval: 0.1
+  dashSpeed: 15
+  dashDuration: 0.2
 --- !u!70 &1768727644
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -903,6 +909,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+  maxHP: 10
   attackRange: 5
   attackCooldown: 1.5
   shot: {fileID: 1950694976}
