@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
             Shoot();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(1))
         {
             if (!isDashing)
                 StartCoroutine(Dash());

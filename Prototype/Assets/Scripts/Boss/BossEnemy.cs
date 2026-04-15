@@ -6,7 +6,7 @@ public class BossEnemy : Enemy
 {
     public BulletSpawner spawner;
 
-    public float patternDelay = 1f;
+    public float patternDelay = 1.5f;
 
     private bool phase2 = false;
 
@@ -28,16 +28,23 @@ public class BossEnemy : Enemy
         }
     }
 
+
     IEnumerator BossLoop()
     {
         while (true)
         {
             if (!phase2)
             {
+                yield return StartCoroutine(Pattern_PredictShot());
+                yield return new WaitForSeconds(patternDelay);
+
                 yield return StartCoroutine(Pattern_Fan());
                 yield return new WaitForSeconds(patternDelay);
 
                 yield return StartCoroutine(Pattern_Burst());
+                yield return new WaitForSeconds(patternDelay);
+
+                yield return StartCoroutine(Pattern_Circle());
                 yield return new WaitForSeconds(patternDelay);
             }
             else
@@ -53,10 +60,26 @@ public class BossEnemy : Enemy
             }
         }
     }
+    Vector2 PredictTargetPosition(float bulletSpeed)
+    {
+        Rigidbody2D targetRb = target.GetComponent<Rigidbody2D>();
+
+        if (targetRb == null)
+            return target.position;
+
+        Vector2 toTarget = target.position - transform.position;
+        float distance = toTarget.magnitude;
+
+        float time = distance / bulletSpeed;
+
+        Vector2 futurePos = (Vector2)target.position + targetRb.velocity * time;
+
+        return futurePos;
+    }
 
     IEnumerator Pattern_Circle()
     {
-        int bulletCount = 16;
+        int bulletCount = 50;
 
         for (int i = 0; i < bulletCount; i++)
         {
@@ -112,6 +135,7 @@ public class BossEnemy : Enemy
 
             yield return new WaitForSeconds(0.2f);
         }
+        yield return StartCoroutine(Pattern_Circle());
     }
 
     IEnumerator Pattern_Fan()
@@ -133,6 +157,24 @@ public class BossEnemy : Enemy
         }
 
         yield return new WaitForSeconds(1f);
+    }
+
+    IEnumerator Pattern_PredictShot()
+    {
+        int shotCount = 20;
+        float delay = 0.1f;
+
+        float bulletSpeed = 8f;
+
+        for (int i = 0; i < shotCount; i++)
+        {
+            Vector2 predictedPos = PredictTargetPosition(bulletSpeed);
+            Vector2 dir = (predictedPos - (Vector2)transform.position).normalized;
+
+            spawner.SpawnBullet(dir);
+
+            yield return new WaitForSeconds(delay);
+        }
     }
 
     IEnumerator Pattern_Circle_And_Burst()
