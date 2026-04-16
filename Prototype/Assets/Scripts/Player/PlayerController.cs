@@ -19,6 +19,11 @@ public class PlayerController : MonoBehaviour
     public float dashDuration = 0.2f;
     private bool isDashing = false;
 
+    public int maxAmmo = 10;
+    private int currentAmmo;
+    public float reloadTime = 1.5f;
+    private bool isReloading = false;
+
     private int playerLayer;
     private int enemyBulletLayer;
 
@@ -39,6 +44,7 @@ public class PlayerController : MonoBehaviour
         playerLayer = LayerMask.NameToLayer("Player");
         enemyBulletLayer = LayerMask.NameToLayer("EnemyBullet");
         camShake = Camera.main.GetComponent<CameraShake>();
+        currentAmmo = maxAmmo;
     }
 
     void Update()
@@ -67,6 +73,12 @@ public class PlayerController : MonoBehaviour
             if (!isDashing)
                 StartCoroutine(Dash());
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (!isReloading && currentAmmo < maxAmmo)
+                StartCoroutine(Reload());
+        }
     }
 
     private void FixedUpdate()
@@ -78,6 +90,13 @@ public class PlayerController : MonoBehaviour
 
     void Shoot()
     {
+        if (isReloading) return;
+        if (currentAmmo <= 0)
+        {
+            StartCoroutine(Reload());
+            return;
+        }
+
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0f;
 
@@ -85,6 +104,13 @@ public class PlayerController : MonoBehaviour
 
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         bullet.GetComponent<Bullet>().SetDirection(dir);
+
+        currentAmmo--;
+
+        if (currentAmmo <= 0)
+        {
+            StartCoroutine(Reload());
+        }
     }
 
     public void TakeDamage(int damage)
@@ -149,6 +175,18 @@ public class PlayerController : MonoBehaviour
         isInvincible = false;
     }
 
+    IEnumerator Reload()
+    {
+        isReloading = true;
+        Debug.Log("Reloading...");
+
+        yield return new WaitForSeconds(reloadTime);
+
+        currentAmmo = maxAmmo;
+        isReloading = false;
+
+        Debug.Log("Reload Complete!");
+    }
     void Die()
     {
         Destroy(gameObject);
