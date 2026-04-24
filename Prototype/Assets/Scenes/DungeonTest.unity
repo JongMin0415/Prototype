@@ -1675,6 +1675,7 @@ GameObject:
   - component: {fileID: 3842911753787581936}
   - component: {fileID: 8431320616799540913}
   - component: {fileID: 6549185871818888062}
+  - component: {fileID: 8431320616799540915}
   m_Layer: 0
   m_Name: StartRoom
   m_TagString: Untagged
@@ -1894,6 +1895,44 @@ MonoBehaviour:
   portalPrefab: {fileID: 2867428548891900537, guid: 033e27a455c354c4cac43bbed469e009, type: 3}
   portalSpawnPoint: {fileID: 1033511847928749961}
   nextRoomPoint: {fileID: 0}
+--- !u!1839735485 &8431320616799540915
+Tilemap:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2600435520155611954}
+  m_Enabled: 1
+  m_Tiles: {}
+  m_AnimatedTiles: {}
+  m_TileAssetArray: []
+  m_TileSpriteArray: []
+  m_TileMatrixArray: []
+  m_TileColorArray: []
+  m_TileObjectToInstantiateArray: []
+  m_AnimationFrameRate: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Origin: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0, y: 0, z: 1}
+  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
+  m_TileOrientation: 0
+  m_TileOrientationMatrix:
+    e00: 1
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 1
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 1
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

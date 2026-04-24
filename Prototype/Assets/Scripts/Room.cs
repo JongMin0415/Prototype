@@ -31,7 +31,11 @@ public class Room : MonoBehaviour
             hasEntered = true;
 
             //  StartRoom이면 적 스폰 안 함
-            if (isStartRoom) return;
+            if (isStartRoom)
+            {
+                SpawnPortal();
+                return;
+            }
 
             SpawnEnemies();
         }
