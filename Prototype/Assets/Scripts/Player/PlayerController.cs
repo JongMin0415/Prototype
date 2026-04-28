@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     public GameObject reloadText;
+    public Image[] hearts;
+
     public float speed = 5f;
     public Transform firePoint;
 
@@ -40,6 +43,7 @@ public class PlayerController : MonoBehaviour
         sr = GetComponentInChildren<SpriteRenderer>();
 
         currentLives = maxLives;
+        UpdateLivesUI();
 
         playerLayer = LayerMask.NameToLayer("Player");
         enemyBulletLayer = LayerMask.NameToLayer("EnemyBullet");
@@ -128,6 +132,7 @@ public class PlayerController : MonoBehaviour
         currentLives -= damage;
         Debug.Log("Player Lives: " + currentLives);
         StartCoroutine(cam.Shake(0.2f, 0.15f));
+        UpdateLivesUI();
 
         if (currentLives <= 0)
         {
@@ -205,5 +210,15 @@ public class PlayerController : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
+    }
+    void UpdateLivesUI()
+    {
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (i < currentLives)
+                hearts[i].enabled = true; 
+            else
+                hearts[i].enabled = false;
+        }
     }
 }
