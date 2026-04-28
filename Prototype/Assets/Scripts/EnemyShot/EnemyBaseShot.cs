@@ -5,7 +5,6 @@ using UnityEngine.Pool;
 
 public abstract class EnemyBaseShot : MonoBehaviour
 {
-    public GameObject bulletPrefab;
     public Transform firePoint;
 
     protected Transform target;
@@ -25,10 +24,16 @@ public abstract class EnemyBaseShot : MonoBehaviour
 
     protected void SpawnBullet(Vector2 dir)
     {
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        GameObject bullet = ObjectPool.Instance.GetEnemyBullet();
 
-        EnemyBullet bulletScript = bullet.GetComponent<EnemyBullet>();
-        bulletScript.SetDirection(dir);
+        if (bullet != null)
+        {
+            bullet.transform.position = firePoint.position;
+            bullet.transform.rotation = Quaternion.identity;
+
+            EnemyBullet bulletScript = bullet.GetComponent<EnemyBullet>();
+            bulletScript.SetDirection(dir);
+        }
     }
 
     public abstract void Fire();

@@ -10,11 +10,19 @@ public class EnemyBullet : MonoBehaviour
     public void SetDirection(Vector2 dir)
     {
         direction = dir;
+
+        CancelInvoke();
+        Invoke("Deactivate", 3f);
     }
 
     void Update()
     {
         transform.Translate(direction * speed * Time.deltaTime);
+    }
+
+    void Deactivate()
+    {
+        ObjectPool.Instance.ReturnEnemyBullet(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -28,12 +36,15 @@ public class EnemyBullet : MonoBehaviour
                 player.TakeDamage(1);
             }
 
-            Destroy(gameObject);
+            Deactivate();
         }
     }
 
-    void Start()
+    void OnDisable()
     {
-        Destroy(gameObject, 3f);
+        CancelInvoke(); 
+        transform.SetParent(null); 
+        direction = Vector2.zero;  
+        enabled = true;           
     }
 }

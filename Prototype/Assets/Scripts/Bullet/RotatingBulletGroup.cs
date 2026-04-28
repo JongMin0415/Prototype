@@ -4,22 +4,38 @@ using UnityEngine;
 
 public class RotatingBulletGroup : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float rotateSpeed = 180f;
-
-    private Vector2 moveDir;
+    public float rotateSpeed = 100f;
+    private Vector2 fireDir;
 
     public void Init(Vector2 dir)
     {
-        moveDir = dir.normalized;
+        fireDir = dir;
+        StartCoroutine(FireAfterDelay());
     }
 
     void Update()
     {
-        //  전체 이동 (플레이어 방향)
-        transform.position += (Vector3)(moveDir * moveSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.forward, rotateSpeed * Time.deltaTime);
+    }
 
-        //  전체 회전
-        transform.Rotate(0, 0, rotateSpeed * Time.deltaTime);
+    IEnumerator FireAfterDelay()
+    {
+        yield return new WaitForSeconds(1f);
+
+        foreach (Transform child in transform)
+        {
+            EnemyBullet bullet = child.GetComponent<EnemyBullet>();
+
+            if (bullet != null)
+            {
+                Vector2 dir = child.localPosition.normalized;
+
+                child.SetParent(null);
+                bullet.enabled = true;
+                bullet.SetDirection(dir);
+            }
+        }
+
+        Destroy(gameObject);
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     [Header("Room Type")]
-    public bool isStartRoom = false; //  시작 방 여부
+    public bool isStartRoom = false;
 
     [Header("Enemy")]
     public GameObject[] enemyPrefabs;
@@ -16,12 +16,14 @@ public class Room : MonoBehaviour
     [Header("Portal")]
     public GameObject portalPrefab;
     public Transform portalSpawnPoint;
-    public Transform nextRoomPoint;
+
+    [Header("Room Connection")]
+    public Transform nextRoomPoint; 
+    public Transform entryPoint; 
 
     private bool hasEntered = false;
     private bool cleared = false;
 
-    //  플레이어 입장 감지
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (hasEntered) return;
@@ -30,7 +32,6 @@ public class Room : MonoBehaviour
         {
             hasEntered = true;
 
-            //  StartRoom이면 적 스폰 안 함
             if (isStartRoom)
             {
                 SpawnPortal();
@@ -41,7 +42,6 @@ public class Room : MonoBehaviour
         }
     }
 
-    //  적 스폰
     void SpawnEnemies()
     {
         foreach (Transform point in spawnPoints)
@@ -58,7 +58,6 @@ public class Room : MonoBehaviour
         StartCoroutine(CheckClear());
     }
 
-    //  클리어 체크
     IEnumerator CheckClear()
     {
         while (!cleared)
@@ -75,7 +74,6 @@ public class Room : MonoBehaviour
         }
     }
 
-    //  포탈 생성
     void SpawnPortal()
     {
         GameObject portal = Instantiate(

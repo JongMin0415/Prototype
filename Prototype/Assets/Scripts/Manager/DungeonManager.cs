@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DungeonManager : MonoBehaviour
 {
-    public Room startRoom; // 씬에 있는 StartRoom 연결
+    public Room startRoom;
 
     public GameObject[] normalRooms;
     public GameObject bossRoom;
@@ -25,7 +25,6 @@ public class DungeonManager : MonoBehaviour
 
         Room prevRoom = startRoom;
 
-        // Normal 방 생성
         for (int i = 0; i < roomCount - 2; i++)
         {
             position += new Vector2(roomWidth, 0);
@@ -40,13 +39,11 @@ public class DungeonManager : MonoBehaviour
 
             Room newRoom = newRoomObj.GetComponent<Room>();
 
-            // 다음 방 연결
-            prevRoom.nextRoomPoint = newRoom.transform;
+            prevRoom.nextRoomPoint = newRoom.entryPoint;
 
             prevRoom = newRoom;
         }
 
-        // Boss 방 생성
         position += new Vector2(roomWidth, 0);
 
         GameObject bossObj = Instantiate(bossRoom, position, Quaternion.identity);
@@ -54,7 +51,6 @@ public class DungeonManager : MonoBehaviour
 
         Room bossRoomScript = bossObj.GetComponent<Room>();
 
-        // 마지막 연결
-        prevRoom.nextRoomPoint = bossRoomScript.transform;
+        prevRoom.nextRoomPoint = bossRoomScript.entryPoint;
     }
 }

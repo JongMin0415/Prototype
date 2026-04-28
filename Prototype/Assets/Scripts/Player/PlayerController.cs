@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 5f;
-    public GameObject bulletPrefab;
     public Transform firePoint;
 
     public int maxLives = 3;
@@ -102,8 +101,16 @@ public class PlayerController : MonoBehaviour
 
         Vector2 dir = (mousePos - transform.position).normalized;
 
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        bullet.GetComponent<Bullet>().SetDirection(dir);
+        GameObject bullet = ObjectPool.Instance.GetPlayerBullet();
+
+        if (bullet != null)
+        {
+            bullet.transform.position = firePoint.position;
+            bullet.transform.rotation = Quaternion.identity;
+
+            Bullet b = bullet.GetComponent<Bullet>();
+            b.SetDirection(dir);
+        }
 
         currentAmmo--;
 

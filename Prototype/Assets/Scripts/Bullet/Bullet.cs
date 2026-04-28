@@ -11,16 +11,19 @@ public class Bullet : MonoBehaviour
     public void SetDirection(Vector2 dir)
     {
         direction = dir;
+        Invoke("Deactivate", 3f);
     }
 
-    void Start()
-    {
-        Destroy(gameObject, 3f);
-    }
     void Update()
     {
         transform.Translate(direction * speed * Time.deltaTime);
     }
+
+    void Deactivate()
+    {
+        ObjectPool.Instance.ReturnPlayerBullet(gameObject);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
@@ -32,7 +35,7 @@ public class Bullet : MonoBehaviour
                 enemy.TakeDamage(damage);
             }
 
-            Destroy(gameObject);
+            Deactivate();
         }
     }
 }
