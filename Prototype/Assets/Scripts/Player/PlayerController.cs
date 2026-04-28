@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameObject reloadText;
     public float speed = 5f;
     public Transform firePoint;
 
@@ -185,12 +186,19 @@ public class PlayerController : MonoBehaviour
     IEnumerator Reload()
     {
         isReloading = true;
+
+        if (reloadText != null)
+            reloadText.SetActive(true); 
+
         Debug.Log("Reloading...");
 
         yield return new WaitForSeconds(reloadTime);
 
         currentAmmo = maxAmmo;
         isReloading = false;
+
+        if (reloadText != null)
+            reloadText.SetActive(false);
 
         Debug.Log("Reload Complete!");
     }
