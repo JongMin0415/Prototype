@@ -31,6 +31,11 @@ public class BossEnemy : Enemy
 
     IEnumerator BossLoop()
     {
+        if (spawner == null)
+        {
+            Debug.LogError("Spawner ¾øÀ½!");
+            yield break;
+        }
         while (true)
         {
             if (!phase2)

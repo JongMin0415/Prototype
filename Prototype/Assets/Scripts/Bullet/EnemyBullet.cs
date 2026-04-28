@@ -6,10 +6,16 @@ public class EnemyBullet : MonoBehaviour
 {
     public float speed = 6f;
     private Vector2 direction;
+    private bool canMove = false;
 
+    public void Stop()
+    {
+        canMove = false;
+    }
     public void SetDirection(Vector2 dir)
     {
         direction = dir;
+        canMove = true;
 
         CancelInvoke();
         Invoke("Deactivate", 3f);
