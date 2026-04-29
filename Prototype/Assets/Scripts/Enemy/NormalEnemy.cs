@@ -14,6 +14,8 @@ public class NormalEnemy : Enemy
     {
         if (target == null) return;
 
+        if (isKnockedBack) return;
+
         float distance = Vector2.Distance(transform.position, target.position);
 
         if (distance > attackRange)
