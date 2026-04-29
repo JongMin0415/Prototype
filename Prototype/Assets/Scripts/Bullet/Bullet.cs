@@ -32,7 +32,8 @@ public class Bullet : MonoBehaviour
 
             if (enemy != null)
             {
-                enemy.TakeDamage(damage);
+                Vector2 hitDir = (collision.transform.position - transform.position).normalized;
+                enemy.TakeDamage(damage, hitDir);
             }
 
             Deactivate();

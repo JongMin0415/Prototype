@@ -341,6 +341,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 364987337}
   m_CullTransparentMesh: 1
+--- !u!1 &521178647 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1156031003739421956, guid: 242abe20189fa834ca033eb504fa9c8f, type: 3}
+  m_PrefabInstance: {fileID: 551656467}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &551656467
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -349,6 +354,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 680227411138737285, guid: 242abe20189fa834ca033eb504fa9c8f, type: 3}
+      propertyPath: m_Size.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 680227411138737285, guid: 242abe20189fa834ca033eb504fa9c8f, type: 3}
+      propertyPath: m_Size.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 985197872506275098, guid: 242abe20189fa834ca033eb504fa9c8f, type: 3}
       propertyPath: m_Text
       value: Reloading...
@@ -392,6 +405,10 @@ PrefabInstance:
     - target: {fileID: 991354853220466063, guid: 242abe20189fa834ca033eb504fa9c8f, type: 3}
       propertyPath: m_SortingOrder
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156031003739421956, guid: 242abe20189fa834ca033eb504fa9c8f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2059598917961457785, guid: 242abe20189fa834ca033eb504fa9c8f, type: 3}
       propertyPath: m_AnchorMax.x
@@ -480,7 +497,7 @@ PrefabInstance:
     - target: {fileID: 3999275158013453878, guid: 242abe20189fa834ca033eb504fa9c8f, type: 3}
       propertyPath: reloadText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 521178647}
     - target: {fileID: 3999275158013453878, guid: 242abe20189fa834ca033eb504fa9c8f, type: 3}
       propertyPath: hearts.Array.size
       value: 3
@@ -497,6 +514,18 @@ PrefabInstance:
       propertyPath: hearts.Array.data[2]
       value: 
       objectReference: {fileID: 364987339}
+    - target: {fileID: 4341906538986996419, guid: 242abe20189fa834ca033eb504fa9c8f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 407
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185636346518770742, guid: 242abe20189fa834ca033eb504fa9c8f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185636346518770742, guid: 242abe20189fa834ca033eb504fa9c8f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 8185636346518770742, guid: 242abe20189fa834ca033eb504fa9c8f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.02
@@ -726,6 +755,7 @@ GameObject:
   - component: {fileID: 1796613664}
   - component: {fileID: 1796613663}
   - component: {fileID: 1796613666}
+  - component: {fileID: 1796613667}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -776,7 +806,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 5.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -821,6 +851,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 634367740}
   offset: {x: 0, y: 0, z: -10}
+--- !u!114 &1796613667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796613662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AssetsPPU: 20
+  m_RefResolutionX: 320
+  m_RefResolutionY: 180
+  m_UpscaleRT: 0
+  m_PixelSnapping: 0
+  m_CropFrameX: 0
+  m_CropFrameY: 0
+  m_StretchFill: 0
 --- !u!1 &2099960741
 GameObject:
   m_ObjectHideFlags: 0
@@ -2393,7 +2443,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16

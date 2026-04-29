@@ -44,11 +44,13 @@ public class Room : MonoBehaviour
 
     void SpawnEnemies()
     {
-        foreach (Transform point in spawnPoints)
+        for (int i = 0; i < spawnPoints.Length; i++)
         {
+            if (i >= enemyPrefabs.Length) break;
+
             GameObject enemy = Instantiate(
-                enemyPrefabs[Random.Range(0, enemyPrefabs.Length)],
-                point.position,
+                enemyPrefabs[i],
+                spawnPoints[i].position,
                 Quaternion.identity
             );
 
